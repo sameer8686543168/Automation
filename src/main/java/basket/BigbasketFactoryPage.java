@@ -1,5 +1,12 @@
 package basket;
 
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
@@ -12,8 +19,10 @@ public class BigbasketFactoryPage {
 	Browser browser;
 	BrowserContext browserContext;
 	Page page;
+	Properties prop;
 	
-	public Page initbrowser(String browsername) {
+	public Page initbrowser(Properties prop) {
+		String browsername = prop.getProperty("browser").trim();
 		System.out.println(browsername);
 		playwright = Playwright.create();
 		
@@ -37,11 +46,37 @@ public class BigbasketFactoryPage {
 			
 			browserContext= browser.newContext();
 		    page = browserContext.newPage();
-		    page.navigate("https://www.bigbasket.com/");
+		    page.navigate(prop.getProperty("url").trim());
 		    return page;
 		    
 		
 		}
+	/**
+	 * this method is to initialize the config properties
+	 * @return 
+	 */
+	
+	
+	public Properties init_prop() {
+		try {
+			FileInputStream ip = new FileInputStream("./src/test/resource/config/config.properties");
+			prop = new Properties();
+			prop.load(ip);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return prop;
+	}
+	
+	
+	
+	
+	
 		
 
 	}

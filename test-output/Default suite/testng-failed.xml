@@ -5,9 +5,11 @@
     <classes>
       <class name="com.qa.basket.testCases.HomePageTest">
         <methods>
-          <include name="teardown"/>
+          <include name="homePageTitleTest"/>
           <include name="setup"/>
           <include name="searchTest"/>
+          <include name="homePageUrlTest"/>
+          <include name="teardown"/>
         </methods>
       </class> <!-- com.qa.basket.testCases.HomePageTest -->
     </classes>

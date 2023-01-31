@@ -3,7 +3,7 @@ package basket;
 import com.microsoft.playwright.Page;
 
 public class Homepage {
-	 Page page;
+	  private Page page;
 	//1. String Locators
 	private String search = "input#input";
 	private String searchicon ="button[type=submit]";//"i.icon.svg-header.svg-search.svg-search-dim.hidden-sm.hidden-xs";
@@ -15,14 +15,20 @@ public class Homepage {
 	}
 	//3.page methods
 	public String getHomepagetitle() {
-		return page.title();
+		String title = page.title();
+		System.out.println(title);
+		return title;
 	}
 	public String gethomeopageurl() {
-		return page.url();
+		String url = page.url();
+		System.out.println(url);
+		return url;
 	}
 	public String dosearch(String productname) {
 		page.fill(search, productname);
 		page.click(searchicon); 
+	    String content=	page.textContent(pageHeader);
+	    System.out.println(content);
 		return page.url();
 	}
 	
